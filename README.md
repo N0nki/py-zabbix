@@ -1,1 +1,1 @@
-# py-zabbix
+# zabbix-py
