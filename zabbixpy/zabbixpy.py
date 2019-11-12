@@ -8,13 +8,13 @@ class ZabbixAPIException(Exception):
     pass
 
 
-class PyZabbix:
+class ZabbixPy:
 
     request_header = {"Content-Type": "application/json-rpc"}
     end_point = "zabbix/api_jsonrpc.php"
 
     def __init__(self, host: str, user: str, password: str):
-        self.url = host + PyZabbix.end_point
+        self.url = host + ZabbixPy.end_point
         self.user = user
         self.password = password
         self.request_id = 1
@@ -42,7 +42,7 @@ class PyZabbix:
             'params': params or {},
             'id': self.request_id
         }
-        response = requests.request(method, self.url, headers=PyZabbix.request_header, data=json.dumps(request_body))
+        response = requests.request(method, self.url, headers=ZabbixPy.request_header, data=json.dumps(request_body))
         try:
             response_json = self.__get_response_json(response)
             self.request_id += 1
