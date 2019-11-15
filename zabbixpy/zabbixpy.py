@@ -20,16 +20,15 @@ class ZabbixPy:
         self.request_id = 1
         self.auth = None
 
-        login_response = self.do_request('GET', 'user.login', {'user': self.user, 'password': self.password})
+        login_response = self.do_request('user.login', {'user': self.user, 'password': self.password})
         self.auth = login_response['result']
 
-    def do_request(self, method: str, api_method: str, params=None) -> dict:
+    def do_request(self, method: str, params=None) -> dict:
         """
         Zabbixサーバにリクエストを飛ばす
 
         arguments:
         * method(str)
-        * api_method(str)
         * params(dict optional, default None)
 
         returns:
@@ -38,11 +37,11 @@ class ZabbixPy:
         request_body = {
             'jsonrpc': '2.0',
             'auth': self.auth or None,
-            'method': api_method,
+            'method': method,
             'params': params or {},
             'id': self.request_id
         }
-        response = requests.request(method, self.url, headers=ZabbixPy.request_header, data=json.dumps(request_body))
+        response = requests.post(self.url, headers=ZabbixPy.request_header, data=json.dumps(request_body))
         try:
             response_json = self.__get_response_json(response)
             self.request_id += 1
@@ -71,4 +70,4 @@ class ZabbixPy:
         """
         user.logoutのリクエストを飛ばしてトークンを無効化する
         """
-        self.do_request('GET', 'user.logout')
+        self.do_request('user.logout')
