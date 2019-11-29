@@ -71,3 +71,9 @@ class ZabbixPy:
         user.logoutのリクエストを飛ばしてトークンを無効化する
         """
         self.do_request('user.logout')
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.logout()
