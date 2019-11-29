@@ -45,7 +45,7 @@ class ZabbixPy:
         try:
             response_json = self.__get_response_json(response)
             self.request_id += 1
-            return response_json
+            return response_json['result']
         except ZabbixAPIException as e:
             print(e)
 
