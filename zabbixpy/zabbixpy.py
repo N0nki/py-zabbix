@@ -21,7 +21,7 @@ class ZabbixPy:
         self.auth = None
 
         login_response = self.do_request('user.login', {'user': self.user, 'password': self.password})
-        self.auth = login_response['result']
+        self.auth = login_response
 
     def do_request(self, method: str, params=None) -> dict:
         """
