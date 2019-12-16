@@ -1,4 +1,6 @@
 """
 Author: Mio Kinno
-date: 2019.10.23
+Date: 2019.10.23
 """
+
+__version__ = '0.1'
