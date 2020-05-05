@@ -11,7 +11,7 @@ class ZabbixAPIException(Exception):
 class ZabbixPy:
 
     request_header = {"Content-Type": "application/json-rpc"}
-    end_point = "zabbix/api_jsonrpc.php"
+    end_point = "api_jsonrpc.php"
 
     def __init__(self, host: str, user: str, password: str):
         self.url = host + ZabbixPy.end_point
